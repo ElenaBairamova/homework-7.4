@@ -2,7 +2,6 @@ let page;
 
 beforeEach(async () => {
   page = await browser.newPage();
-  await page.goto("https://github.com/team");
 });
 
 afterEach(() => {
@@ -10,6 +9,9 @@ afterEach(() => {
 });
 
 describe("Github page tests", () => {
+  beforeEach(async () => {
+    await page.goto("https://github.com/team");
+  });
   test("The h1 header content'", async () => {
     const firstLink = await page.$("header div div a");
     await firstLink.click();
@@ -31,4 +33,44 @@ describe("Github page tests", () => {
     const actual = await page.$eval(btnSelector, link => link.textContent);
     expect(actual).toContain("Sign up for free")
   }, 10000);
+});
+
+describe("Other page github", () => {
+  beforeEach(async () => {
+    page = await browser.newPage();
+  });
+  afterEach(() => {
+    page.close();
+  }); 
+
+  test("Github Actions Title", async() => {
+    await page.goto("https://github.com/features/actions"); 
+    await page.waitForSelector("h1");
+    const title = await page.title();
+    expect(title).toEqual( 
+      "Automate your workflow from idea to production"
+    ); 
+
+  }, 10000);
+
+  test("Github Actions Title", async() => {
+    await page.goto("https://github.com/features/securitys"); 
+    await page.waitForSelector("h1");
+    const title = await page.title();
+    expect(title).toEqual( 
+      "Security at every step"
+    ); 
+
+  }, 10000);
+
+  test("Github Actions Title", async() => {
+    await page.goto("https://github.com/features/issues"); 
+    await page.waitForSelector("h1");
+    const title = await page.title();
+    expect(title).toEqual( 
+      "Project planning for developers"
+    ); 
+
+  }, 10000);
+
 });
