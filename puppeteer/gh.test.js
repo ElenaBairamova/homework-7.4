@@ -36,12 +36,6 @@ describe("Github page tests", () => {
 });
 
 describe("Other page github", () => {
-  beforeEach(async () => {
-    page = await browser.newPage();
-  });
-  afterEach(() => {
-    page.close();
-  }); 
 
   test("Github Actions Title", async() => {
     await page.goto("https://github.com/features/actions"); 
